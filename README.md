@@ -6,11 +6,12 @@ Featuring flash loans, price oracles, governance, NFTs, lending pools, smart con
 
 ## Progress
 
-#### 1 Unstoppable [ x ]
+#### 1 Unstoppable [ ]
 #### **2 - Naive receiver [ x ]**
 - The receiver contract lacks proper validations for the flash loan amount received; it merely repays the received amount plus a fixed fee set by the flash loan lender contract. Exploiting this vulnerability, the lender contract can issue a flash loan ten times with a zero value, thereby draining the borrower's contract. The same has been implemented using an attacker contract.
 #### 3 Truster [ ]
-#### 4 Side entrance [ ]
+#### **4 Side entrance [ x ]**
+- The pool contract incorrectly checks whether the flash loan funds have been returned. It merely verifies if the contract's balance remains the same as before the flash loan. However, this validation can be misled by depositing the funds and immediately withdrawing them again. The same vulnerability has been exploited using an attacker contract.
 #### 5 The rewarder [ ]
 #### 6 Selfie [ ]
 #### 7 Compromised [ ]
